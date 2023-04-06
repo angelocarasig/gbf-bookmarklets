@@ -1,0 +1,13 @@
+
+<ng-container [ngSwitch]="currentComponent">
+	<app-toolbar 
+		*ngIf="currentComponent !== 'startup'" 
+
+		(homeEmitter)="goHome()">
+		
+	</app-toolbar>
+
+	<app-main-container *ngSwitchCase="'startup'" (startFromScratch)="startFromScratch($event)"></app-main-container>
+	<app-bookmarklet-loader *ngSwitchCase="'load'"></app-bookmarklet-loader>
+	<app-bookmarklet-container *ngSwitchCase="'new'"></app-bookmarklet-container>
+</ng-container>

@@ -1,0 +1,44 @@
+.p-toolbar {
+  position: absolute;
+  border-radius: 25px;
+  z-index: 5;
+  background-color: #282828;
+  cursor: grab;
+}
+
+.toolbar-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+// Draggable image
+img.draggable {
+  width:43px;
+  height: auto;
+  transform: translateY(4px);
+  filter: brightness(0) saturate(100%) invert(100%);
+}
+
+.main-tools {
+  display: flex;
+  flex-direction: row;
+}
+
+.options-wrapper {
+  flex: 1;
+  margin-top: 25px;
+}
+
+.p-toolbar-group-start {
+  margin-right: 10px;
+}
+
+.p-toolbar-group-end {
+  margin-left: 10px;
+}
+
+.drag-boundary {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}

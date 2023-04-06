@@ -1,0 +1,6 @@
+<div class="bookmarks-container" [style.top]="getTopSpacing()" *ngIf="(bookmarksVisible$ | async)">
+  <ng-container *ngFor="let bookmark of bookmarks">
+    <app-bookmarklet-item [bookmark]="bookmark" (sendUpdatedBookmark)="onBookmarkUpdated($event)"></app-bookmarklet-item>
+    </ng-container>
+</div>
+<app-game-window></app-game-window>

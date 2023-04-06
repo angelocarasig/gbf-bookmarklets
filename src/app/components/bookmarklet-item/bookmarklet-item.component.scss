@@ -1,0 +1,39 @@
+.bookmarklet-item {
+	position: absolute;
+	display: block;
+	z-index: 3;
+	padding: 5px;
+	border-radius: 5px;
+	text-align: center;
+	cursor: pointer;
+	user-select: none;
+}
+
+.flex-container {
+	display: flex;
+}
+
+.left-bookmark {
+	left: 0;
+}
+
+.right-bookmark {
+	right: 0;
+}
+
+.color-picker {
+	cursor: pointer;
+	user-select: none;
+	border-radius: 2px;
+	display: flex;
+	justify-content: center;
+}
+
+.option-buttons {
+	display:flex;
+	justify-content: space-between;
+}
+
+.positioning-buttons {
+	display: flow-root;
+}

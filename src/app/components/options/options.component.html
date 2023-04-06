@@ -1,0 +1,62 @@
+<div class="options-tab">
+  <p-tabView>
+    <p-tabPanel header="Bookmark Options">
+      <p-accordion>
+        <p-accordionTab header="Size and Position">
+          
+          <div class="p-inputgroup unit-group">
+            <p-selectButton [options]="units" [(ngModel)]="options.units" (ngModelChange)="updateGlobalOptions()"></p-selectButton>
+          </div>
+
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-arrows-h"></i>
+            </span>
+            <p-inputNumber [(ngModel)]="options.width" (ngModelChange)="updateGlobalOptions()" decimalSeparator="." [minFractionDigits]=1></p-inputNumber>
+          </div>
+
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon">
+              <i class="pi pi-arrows-v"></i>
+          </span>
+          <p-inputNumber [(ngModel)]="options.height" (ngModelChange)="updateGlobalOptions()" decimalSeparator="." [minFractionDigits]=1></p-inputNumber>
+          </div>
+
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon">
+              <i class="pi pi-bars"></i>
+          </span>
+          <p-inputNumber [(ngModel)]="options.spacing" (ngModelChange)="updateGlobalOptions()" decimalSeparator="." [minFractionDigits]=1></p-inputNumber>
+          </div>
+
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon">
+              <i class="pi pi-eject"></i>
+          </span>
+          <p-inputNumber [(ngModel)]="options.topoffset" (ngModelChange)="updateGlobalOptions()" decimalSeparator="." [minFractionDigits]=1></p-inputNumber>
+          </div>
+
+        </p-accordionTab>
+
+
+      </p-accordion>
+    </p-tabPanel>
+
+    <p-tabPanel header="Visual Options">
+      <p-accordion>
+
+        <p-accordionTab header="Game Zoom">
+			    <p-rating [(ngModel)]="gameZoom" [stars]=3 (onRate)="changeGameSize()" [cancel]="false">
+            <ng-template pTemplate="onicon">
+              <img [src]="gameZoomIconPath" width="50px" height="50px"/>
+            </ng-template>
+            <ng-template pTemplate="officon">
+              <img [src]="gameZoomIconPath" width="50px" height="50px"/>
+            </ng-template>
+          </p-rating>
+        </p-accordionTab>
+
+      </p-accordion>
+    </p-tabPanel>
+  </p-tabView>
+</div>

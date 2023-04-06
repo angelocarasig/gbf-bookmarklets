@@ -1,0 +1,92 @@
+<div 
+	class="bookmarklet-item" 
+	[style.opacity]="getOpacity()"
+	[style.width]="getWidth()"
+	[style.height]="getHeight()"
+	[style.top]="getSpacing()"
+	[style.background-color]="getBackgroundColor()"
+	[ngStyle]="getPositionOffset()"
+	(click)="toggleEditMode()"
+	>
+	{{bookmark.name}}
+</div>
+
+<div class="flex-container">
+
+<p-sidebar [(visible)]="editMode" [position]="getPosition() === 'left' ? 'right' : 'left'" styleClass="w-30rem" (onHide)="revertChanges()" (dismissableMask)="true">
+
+	<ng-template pTemplate="header">
+		<h1>Edit Bookmark</h1>
+	</ng-template>
+
+	<ng-template pTemplate="content">
+		<form [formGroup]="bookmarkParams" (ngSubmit)="onSubmit()">
+
+			<label>Username</label><br/>
+			<input pInputText placeholder="Name" formControlName="name"  [class.ng-invalid]="bookmarkParams.controls['name'].invalid && submitted" [class.ng-dirty]="bookmarkParams.controls['name'].invalid && submitted"/>
+
+			<p-divider></p-divider>
+
+			<label>URL</label><br/>
+			<input pInputText placeholder="URL" formControlName="url" [class.ng-invalid]="bookmarkParams.controls['url'].invalid && submitted" [class.ng-dirty]="bookmarkParams.controls['url'].invalid && submitted"/>
+
+			<p-divider></p-divider>
+
+			<label>Text Color</label><br/>
+			<p-colorPicker formControlName="color" format="hex"></p-colorPicker>
+			<input pInputText placeholder="Color" formControlName="color" [value]="bookmarkParams.get('color')?.value"/>
+
+			<br/>
+			<br/>
+
+			<label>Background Color</label><br/>
+			<p-colorPicker formControlName="background" format="hex"></p-colorPicker>
+			<input pInputText placeholder="Background Color" formControlName="background" [value]="bookmarkParams.get('background')?.value" [class.ng-invalid]="submitted && !isValidColorBool || (bookmarkParams.controls['background'].invalid && submitted)" [class.ng-dirty]="!isValidColorBool || (bookmarkParams.controls['background'].invalid && submitted)"/>
+
+			<p-divider></p-divider>
+
+			<label>Opacity</label><br/>
+			<div>
+				<p-inputNumber [(ngModel)]="opacity" placeholder="Opacity" formControlName="opacity" [class.ng-invalid]="bookmarkParams.controls['opacity'].invalid && submitted" [class.ng-dirty]="bookmarkParams.controls['opacity'].invalid && submitted" class="w-full"/>
+				<p-slider [(ngModel)]="opacity" formControlName="opacity" class="w-full" [min]="0" [max]="100" [step]="1"></p-slider>
+			</div>
+
+			<p-divider></p-divider>
+
+			<div class="positioning-buttons">
+
+				<p-selectButton [options]="units" formControlName="units"></p-selectButton>
+				<br/>
+				<span class="p-inputgroup-addon">
+					<i class="pi pi-arrows-h"></i>
+				</span>
+				<input pInputText placeholder="Width" formControlName="width" [class.ng-invalid]="bookmarkParams.controls['width'].invalid && submitted" [class.ng-dirty]="bookmarkParams.controls['url'].invalid && submitted"/>
+				<br/>
+
+				<span class="p-inputgroup-addon">
+					<i class="pi pi-arrows-v"></i>
+				</span>
+				<input pInputText placeholder="Height" formControlName="height" [class.ng-invalid]="bookmarkParams.controls['height'].invalid && submitted" [class.ng-dirty]="bookmarkParams.controls['height'].invalid && submitted"/>
+				<br/>
+				
+				<span class="p-inputgroup-addon">
+					<i class="pi pi-arrow-right" *ngIf="getPosition() === 'left'"></i>
+					<i class="pi pi-arrow-left" *ngIf="getPosition() === 'right'"></i>
+				</span>
+				<input pInputText placeholder="Position Offset" formControlName="positionoffset" [class.ng-invalid]="bookmarkParams.controls['positionoffset'].invalid && submitted" [class.ng-dirty]="bookmarkParams.controls['positionoffset'].invalid && submitted"/>
+
+			</div>
+
+			<p-divider></p-divider>
+		</form>
+	</ng-template>
+	
+	<ng-template pTemplate="footer">
+		<div class="option-buttons">
+			<p-button label="Save" icon="pi pi-check" styleClass="p-button-success mr-2" (click)="onSubmit()" [style.left]="0"></p-button>
+			<p-button icon="pi pi-refresh" styleClass="mr-2" (click)="revertChanges()"></p-button>
+			<p-button label="Cancel" icon="pi pi-times" styleClass="p-button-danger mr-2" (click)="revertChanges()" [style.right]="0"></p-button>
+		</div>
+	</ng-template>
+</p-sidebar>
+</div>

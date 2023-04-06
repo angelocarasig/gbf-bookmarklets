@@ -1,0 +1,44 @@
+<div class="game" [style.zoom]="zoomLevel" [style.position]="'absolute'">
+  <div
+    class="mbga-left-sidebar drop-zone"
+    [style.zoom]="1 / zoomLevel"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event, 0)"
+  ></div>
+  <div class="column">
+    <div
+    class="game-content drop-zone"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event, 1)"
+  >
+    <p-button
+      icon="pi pi-list"
+      [style.padding]="'5px'"
+      [style.position]="'absolute'"
+      [style.z-index]="'10'"
+      [style.left]="'50%'"
+      [style.display]]="'flex'"
+      [style.align-content]="'center'"
+      [style.justify-content]="'center'"
+      styleClass="p-button-secondary p-button-raised"
+      (click)="toggleToolbarVisibility()"
+      *ngIf="!(toolbarVisible$ | async)"
+    >
+    </p-button>
+  </div>
+  <div
+    class="game-footer drop-zone"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event, 2)"
+  ></div>
+  </div>
+  <div
+    class="mbga-right-sidebar drop-zone"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event, 3)"
+  ></div>
+</div>

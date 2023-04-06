@@ -1,0 +1,36 @@
+<p-toast></p-toast>
+<p-confirmDialog [position]="'bottom'" acceptButtonStyleClass="p-button-success" rejectButtonStyleClass="p-button-outlined p-button-danger"></p-confirmDialog>
+
+<div class="drag-boundary">
+  
+<p-toolbar class="p-toolbar" cdkDragBoundary=".drag-boundary" cdkDrag *ngIf="toolbarVisible$ | async">
+  <div class="toolbar-buttons">
+    <div cdkDragHandle>
+      <img class="draggable" [src]="dragHandle">
+    </div>
+  
+    <div cdkDrag cdkDragDisabled class="main-tools">
+      <div class="p-toolbar-group-start gap-3">
+        <p-button icon="pi pi-save" styleClass="p-button-success" (onClick)="showSaveConfirmation()"></p-button>
+        <p-button icon="pi pi-eye" (onClick)="toggleBookmarksVisibility()" *ngIf="currentBookmarkVisible"></p-button>
+        <p-button icon="pi pi-eye-slash" (onClick)="toggleBookmarksVisibility()" *ngIf="!currentBookmarkVisible"></p-button>
+      </div>
+
+      <div class="p-toolbar-group-center gap-3">
+        <p-button icon="pi pi-home" styleClass="p-button-secondary" (onClick)="showHomeConfirmation()"></p-button>
+      </div>
+      
+      <div class="p-toolbar-group-end gap-3">
+        <p-button icon="pi pi-spin pi-cog" styleClass="p-button-secondary" (onClick)="toggleOptions()"></p-button>
+        <p-button icon="pi pi-undo" styleClass="p-button-warning" (onClick)="resetBookmarks()"></p-button>
+        <p-button icon="pi pi-times" styleClass="p-button-danger" (onClick)="toggleToolbarVisibility()"></p-button>
+      </div>    
+    </div>
+  </div>
+  <div cdkDrag cdkDragDisabled class="options-wrapper" *ngIf="showOptions">
+    <div class="mb-3">
+      <app-options></app-options>
+    </div>
+  </div>
+</p-toolbar>
+</div>

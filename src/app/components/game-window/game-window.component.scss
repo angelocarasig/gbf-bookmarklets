@@ -1,0 +1,53 @@
+.game {
+  zoom: 1;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  height: 100%;
+  background-repeat: no-repeat;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.game-content {
+  background-color: rgb(137, 121, 255);
+  width: 320px;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.game-footer {
+  background-color: #492423;
+  width: 320px;
+  height: 50px;
+  position: sticky;
+  bottom: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.mbga-left-sidebar {
+  background-color: #0d1414;
+  width: 64px;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.mbga-right-sidebar {
+  background-color: #0d1414;
+  width: 64px;
+  height: 100%;
+  flex-grow: 1;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.drop-zone {
+  background-size: cover;
+  background-repeat: no-repeat;
+}

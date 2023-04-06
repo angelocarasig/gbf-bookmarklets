@@ -1,0 +1,29 @@
+.main-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    gap: 10px;
+    height: 90vh;
+    width: 90vw;
+    border: 1px solid white;
+    background: rgba(34, 34, 34, 0.406);
+
+    z-index: 0;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container-title {
+    padding-left: 5rem;
+    padding-right: 5rem;
+    font-size: 64px;
+}
+
+.container-buttons {
+    cursor: pointer;
+}
