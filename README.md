@@ -5,15 +5,15 @@ WIP
 
 # DISCLAIMER
 
-If you get banned it's not my problem. This shouldn't be a bannable thing anyway though since it's purely UI focused. (NOTE: shouldn't does not mean guarantee. It's like, 99% lol)
+Use with caution.
 
 # What is this?
 
-This application creates a user-customized 'bookmarklets' configuration for Granblue Fantasy. This is meant to be used as a tampermonkey script for Granblue, which means, in the same gray area as things as some other extensions like yee woeful Vxxxmate.
+A webapp that lets you to create customizable bookmarklets for whatever websites you want this to run on.
 
 # How do I use this?
 
-[Click here](deadlink). Customize to your preferences and click export. You then should receive a .js file that contains that giving configuration. You can then import it as a script in tampermonkey and be on your merry way enjoying the bookmark features that Viramate used to have.
+[Click here](https://gbf-bookmarklets.vercel.app/). Customize to your preferences and click the save button. You then should receive a .js file that contains that giving configuration. You can then import it into tampermonkey and be on your way.
 
 # Running Locally
 This application is built in Angular. Make sure things like node, npm and the angular cli is installed beforehand.
@@ -44,8 +44,9 @@ Below is just additional stuff that isn't important
 - ~~Fix top offset~~
 - Refresh doesn't reset state
 - Opening new bookmarks close opened ones
-
-
+- Button options:
+  - Middle click => Open in new tab
+  - Right click => toggle bookmarklet
 
 <details>
 <summary>Old TODO</summary>
