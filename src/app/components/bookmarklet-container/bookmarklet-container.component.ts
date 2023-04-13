@@ -1,11 +1,12 @@
 
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Subscription, timeout } from 'rxjs';
 
 import { MAX_BOOKMARKS } from 'src/app/constants';
 import { Bookmark } from 'src/app/models/bookmark.model';
 import { BookmarkVisibilityService } from 'src/app/services/bookmark-visibility/bookmark-visibility.service';
 import { BookmarkService } from 'src/app/services/bookmark/bookmark.service';
+import { BookmarkLoadService } from 'src/app/services/bookmark-load/bookmark-load.service';
 import { ResetService } from 'src/app/services/reset/reset.service';
 
 @Component({
@@ -13,16 +14,48 @@ import { ResetService } from 'src/app/services/reset/reset.service';
   templateUrl: './bookmarklet-container.component.html',
   styleUrls: ['./bookmarklet-container.component.scss']
 })
-export class BookmarkletContainerComponent implements OnInit {
+export class BookmarkletContainerComponent implements OnInit {  
+  @Input() startFromScratch!: string; // Either 'new' or 'load'
+  loadedOnce!: boolean;
   bookmarks!: Array<Bookmark>;
   globalOptions!: Bookmark;
   bookmarksVisible$ = this.bookmarkVisibilityService.visible$;
   resetSubscription!: Subscription;
-  private localStorageKey = 'bookmarks';
+  
+  displayDialog: boolean = false;
+  externalUrl: string = '';
+  navigateConfirmed: boolean = false;
 
-  constructor(private bookmarkService: BookmarkService, private bookmarkVisibilityService: BookmarkVisibilityService, private resetService: ResetService) {};
+  navigateTo(url: string): void {
+    this.externalUrl = url;
+    this.displayDialog = true;
+  }
+
+  onConfirm(): void {
+    this.navigateConfirmed = true;
+    this.displayDialog = false;
+    window.open(this.externalUrl, '_blank');
+  }
+
+  onCancel(): void {
+    this.externalUrl = '';
+    this.displayDialog = false;
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  onBeforeUnload(event: BeforeUnloadEvent): void {
+    if (!this.navigateConfirmed) {
+      event.preventDefault();
+      event.returnValue = '';
+      this.displayDialog = true;
+    }
+  }
+
+  constructor(private bookmarkService: BookmarkService, private bookmarkVisibilityService: BookmarkVisibilityService, private bookmarkLoadService: BookmarkLoadService, private resetService: ResetService) {};
 
   ngOnInit(): void {
+    // If it hasn't been loaded in once, set to true and load the bookmarks in inside resetBookmarks
+    this.loadedOnce = this.startFromScratch == null || this.startFromScratch === 'load';
     this.resetBookmarks();
     
     // Subscribe so reset whenever it's triggered
@@ -58,17 +91,6 @@ export class BookmarkletContainerComponent implements OnInit {
     this.saveBookmarks();
   }
 
-  // Load from local storage attempt
-  // loadBookmarks(): boolean {
-  //   const storedBookmarks = localStorage.getItem(this.localStorageKey);
-  //   if (storedBookmarks != null) {
-  //     this.bookmarks = JSON.parse(storedBookmarks);
-  //     this.bookmarkService.setBookmarks(this.bookmarks);
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
   resetBookmarks(): void {
     this.bookmarks = new Array<Bookmark>;
     this.globalOptions = new Bookmark({...this.bookmarkService.getGlobalProperties()});
@@ -93,11 +115,21 @@ export class BookmarkletContainerComponent implements OnInit {
       this.bookmarks.push(rightBookmark);
     }
   
+    if (!this.loadedOnce) {
+      const loadedBookmarks = this.bookmarkLoadService.bookmarksToLoad$;
+      if (loadedBookmarks != null) {
+        loadedBookmarks.forEach((loadedBookmark) => {
+          const index = this.bookmarks.findIndex((bookmark) => bookmark.id === loadedBookmark.id);
+          this.bookmarks[index] = loadedBookmark;
+        })
+      }
+      this.loadedOnce = true;
+    }
+
     this.saveBookmarks();
   }
 
   private saveBookmarks(): void {
-    // TODO: Add save to local storage here
     this.bookmarkService.setBookmarks(this.bookmarks);
   }
 }

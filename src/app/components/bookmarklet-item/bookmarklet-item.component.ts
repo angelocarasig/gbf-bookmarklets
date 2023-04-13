@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { Bookmark } from 'src/app/models/bookmark.model';
 import { BookmarkService } from 'src/app/services/bookmark/bookmark.service';
 
@@ -23,6 +24,8 @@ export class BookmarkletItemComponent implements OnInit {
   opacity!: number;
   // Above is local opacity, but is identical in value to the formBuilder opacity
   // Only used to have two-way binding between the input and slider
+
+  isRightClicked!: boolean;
   
   constructor(private bookmarkService: BookmarkService, private formBuilder: FormBuilder) {}
 
@@ -47,6 +50,8 @@ export class BookmarkletItemComponent implements OnInit {
     this.isValidColorBool = true;
     this.units = ['px', 'rem'];
     this.opacity = 100;
+
+    this.isRightClicked = false;
 
     this.initSubscriptionObservers();
   }
@@ -179,4 +184,19 @@ export class BookmarkletItemComponent implements OnInit {
 
     this.isValidColorBool = hexRegex.test(currentBackgroundColor) || rgbRegex.test(currentBackgroundColor) || rgbaRegex.test(currentBackgroundColor) || hslaRegex.test(currentBackgroundColor);
  }
+
+  handleMouseDown(event: MouseEvent): void {
+    if (event.button === 2) {
+      event.preventDefault();
+      this.isRightClicked = !this.isRightClicked;
+      console.log("Right clicked!");
+    }
+  }
+
+  handleAuxClick(event: MouseEvent): void {
+    if (event.button === 1) {
+      event.preventDefault();
+      window.open(this.bookmark.url, '_blank');
+    }
+  }
 }

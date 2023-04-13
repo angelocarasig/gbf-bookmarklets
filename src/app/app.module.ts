@@ -43,6 +43,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 // API Stuff
 import { ConfirmationService } from 'primeng/api';
@@ -90,7 +91,8 @@ import { MessageService } from 'primeng/api';
     ToastModule,
     TreeModule,
     SidebarModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    InputTextareaModule
   ],
   providers: [
     ConfirmationService,

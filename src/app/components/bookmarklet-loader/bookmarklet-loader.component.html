@@ -1,1 +1,7 @@
-<p>bookmarklet-loader works!</p>
+<div class="main-container">
+    <div class="container-title"><b>Load Existing Bookmarks</b></div>
+    <h1>Paste Your Bookmarks Here:</h1>
+	<textarea rows="5" cols="30" pInputTextarea [(ngModel)]="bookmarks"></textarea>
+	<button pButton pRipple label="Submit" class="p-button-success" (click)="validateBookmarks()"></button>
+	<button pButton pRipple label="Go Home" class="p-button" icon="pi pi-home" (click)="goHome()"></button>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-component-handler',
@@ -9,8 +9,7 @@ export class ComponentHandlerComponent implements OnInit {
   currentComponent: string = 'startup';
 
   ngOnInit(): void {
-    // TODO: Change back to 'startup' later
-    this.currentComponent = 'new';
+    this.currentComponent = 'startup';
   }
 
   goHome(): void {

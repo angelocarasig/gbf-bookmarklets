@@ -88,8 +88,32 @@ export class ExportJavascriptService {
           }
 
           bookmark.innerHTML = bookmarks[i].name;
-          bookmark.addEventListener('click', () => {
-            window.location.href = bookmarks[i].url;
+
+          // Mouse Button Options
+          bookmark.addEventListener("mousedown", function (event) {
+            if (bookmark.rightClicked) {
+              if (event.button === 2) {
+                // Right-click when already right-clicked
+                bookmark.style.background = bookmarks[i].background;
+                bookmark.style.border = "";
+                bookmark.rightClicked = false;
+              }
+              return;
+            }
+    
+            if (event.button === 0) {
+              // Left-click
+              window.location.href = bookmarks[i].url;
+            } else if (event.button === 1) {
+              // Middle-click
+              event.preventDefault();
+              window.open(bookmarks[i].url, "_blank");
+            } else if (event.button === 2) {
+              // Right-click
+              bookmark.style.background = "";
+              bookmark.style.border = "1px dashed black";
+              bookmark.rightClicked = true;
+            }
           });
 
           bookmarksContainer.appendChild(bookmark);

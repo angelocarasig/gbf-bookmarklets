@@ -7,6 +7,9 @@
 	[style.background-color]="getBackgroundColor()"
 	[ngStyle]="getPositionOffset()"
 	(click)="toggleEditMode()"
+	(mousedown)="handleMouseDown($event)"
+	(auxclick)="handleAuxClick($event)"
+	[ngClass]="{'disabled': isRightClicked}"
 	>
 	{{bookmark.name}}
 </div>
