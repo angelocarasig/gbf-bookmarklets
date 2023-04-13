@@ -3,3 +3,9 @@ Changelog:
 [+] Demo Version deployed
 [?] Load Options
 [?] Refresh Prevents Game From Being Loaded
+
+13th April 2023:
+[+] Load functionality
+[+] Page refresh/redirect confirmations
+[+] Non-leftclick mouse events
+[?] Bookmark transition/animation stuff
