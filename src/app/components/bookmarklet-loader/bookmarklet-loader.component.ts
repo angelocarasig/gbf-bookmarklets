@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { VALIDATE_BOOKMARKS } from 'src/app/constants';
 import { Bookmark } from 'src/app/models/bookmark.model';
 import { BookmarkLoadService } from 'src/app/services/bookmark-load/bookmark-load.service';
 
@@ -15,15 +14,22 @@ export class BookmarkletLoaderComponent {
   constructor(private bookmarkLoadService: BookmarkLoadService) {}
   bookmarksArray!: Array<Bookmark>;
   bookmarks = '';
-  //this.bookmarkLoadService.loadBookmarks(bookmarks);
 
   validateBookmarks(): void {
-    const cleanInput = this.bookmarks != null ? this.bookmarks.replace(/const\s+bookmarks\s+=\s+/, '') : '';
-    const arrayString = cleanInput.match(/\[(.*)\]/s)![0];
-    const array = eval(arrayString);
-    const bookmarks = array.map((item: any) => new Bookmark(item));
-    this.bookmarkLoadService.loadBookmarks(bookmarks);
-    this.startFromScratch.emit(true);
+    try {
+      const cleanInput = this.bookmarks != null ? this.bookmarks.replace(/const\s+bookmarks\s+=\s+/, '') : '';
+      if (cleanInput === '') {
+        throw new Error("Invalid Input");
+      }
+      const arrayString = cleanInput.match(/\[(.*)\]/s)![0];
+      const array = eval(arrayString);
+      const bookmarks = array.map((item: any) => new Bookmark(item));
+      this.bookmarkLoadService.loadBookmarks(bookmarks);
+      this.startFromScratch.emit(true);
+    }
+    catch (e) {
+      console.error("Invalid Input");
+    }
   }
 
   goHome(): void {
