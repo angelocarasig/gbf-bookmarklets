@@ -1,11 +1,51 @@
 WIP
 
+# DISCLAIMER
+
+Use with caution.
+
+On a side note, the loading function uses the javascript `eval()` function. [Use this tool responsibly with that in mind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval).
+
+# Features
+- Bookmarks have configurable, height, width, spacing between eachother, background color, text color, 
+- You can drag and drop images onto these areas to have a more accurate background and display:
+
+![image](https://user-images.githubusercontent.com/82582439/231706967-777916ff-1f2e-4c35-8b6c-e945a537b269.png)
+
+A fully dragged/dropped game container:
+
+
+![image](https://user-images.githubusercontent.com/82582439/231707557-44ad59d6-3ccd-40de-a405-5aad029c5fe9.png)
+
+
+- Configurable game size in options depending on what zoom level of granble you play at
+- Below are global settings !! Modifying them modifies all bookmarks without confirmation
+
+![image](https://user-images.githubusercontent.com/82582439/231707728-0681f33c-6362-455a-b02c-b3379aeab605.png)
+
+- Load previous bookmarks in like this:
+1. Copy this entire line from the arrow (Just pressing ctrl + c while the selector is on that line is sufficient, no need to highlight the whole thing):
+
+![image](https://user-images.githubusercontent.com/82582439/231707972-2368d712-dbab-48af-9dcd-ba179bf8498c.png)
+
+2. Paste it here when loading bookmarks
+
+![image](https://user-images.githubusercontent.com/82582439/231708269-8cb041b5-1d43-487e-b048-dedf4d112e3b.png)
+
+3. ???
+
+4. Profit
+
+
+
 <details>
-<summary></summary>
+<summary>A more literal README</summary>
 
 # DISCLAIMER
 
 Use with caution.
+
+On a side note, the loading function uses the javascript `eval()` function. Use this tool responsibly.
 
 # What is this?
 
